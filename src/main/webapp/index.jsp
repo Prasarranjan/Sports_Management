@@ -8,6 +8,8 @@
     <title>Sports Club Registration Form</title>
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="plugin/jquerytoast/src/jquery.toast.css" rel="stylesheet" />
+    <link href="plugin/jquerytoast/dist/jquery.toast.min.css" rel="stylesheet" />
     <style>
         body {
             background-color: #f8f9fa;
@@ -41,6 +43,10 @@
             font-size: 0.9em;
             margin-top: 5px;
         }
+        .toast-success {
+            background-color: #28a745;
+            color: white;
+        }
 
     </style>
 </head>
@@ -61,6 +67,7 @@
                         <%
                             // Database connection details
                             String jdbcURL = "jdbc:mysql://localhost:3306/SportsClub";
+
                             String jdbcUsername = "root";  // change to your username
                             String jdbcPassword = "prasar123";  // change to your password
 
@@ -195,5 +202,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="Ajax.js"></script>
+<script src="plugin/jquerytoast/src/jquery.toast.js"></script>
+<script src="plugin/jquerytoast/dist/jquery.toast.min.js"></script>
 </body>
 </html>

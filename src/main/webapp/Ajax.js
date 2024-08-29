@@ -149,7 +149,21 @@ $(document).ready(function () {
                 processData: false,
                 success: function (response) {
                     if (response.trim() === "done") {
-                        alert('Added successfully');
+                       // alert('Added successfully');
+                         $.toast({
+                            text: "Book Added Successfully",
+                            heading: 'Success',
+                            icon: 'success',
+                            showHideTransition: 'fade',
+                            allowToastClose: true,
+                            hideAfter: 5000,
+                            stack: 5,
+                            position: 'top-center',
+                            textAlign: 'left',
+                            loader: true,
+                            loaderBg: '#9EC600',
+                            bgColor: '#28a745'
+                        });
                     } else {
                         alert('Failed to add player or photo');
                     }
