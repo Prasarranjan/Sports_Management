@@ -36,6 +36,12 @@
         .btn-reset:hover {
             background-color: #5a6268;
         }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -43,13 +49,14 @@
     <div class="form-header text-center">
         <h1>Sports Club Registration Form</h1>
     </div>
-    <form id="playername" action="servlet" method="POST" enctype="multipart/form-data">
+    <form id="playername"  enctype="multipart/form-data">
         <div class="form-row mb-4">
             <!-- Club Name first -->
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="clubName">Club Name</label>
                     <select id="clubName" name="clubName" class="form-control">
+<%--                        <span id="clubError" style="color: red;"></span>--%>
                         <option value="">Select Club</option>
                         <%
                             // Database connection details
@@ -105,6 +112,8 @@
                     <select id="sportsName" class="form-control">
                         <option value="">Select Sports</option>
                     </select>
+<%--                    <span id="sportsError" style="color: red;"></span>--%>
+
                     <!-- Hidden input to capture sportsId -->
                     <input type="hidden" id="sportsId" name="sportsId" value="">
                 </div>
@@ -119,12 +128,16 @@
                     <div class="form-group">
                         <label for="applicantName">Name</label>
                         <input type="text" id="applicantName" class="form-control" name="name" placeholder="Full Name">
+                        <div id="nameError" class="error-message"></div>
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" class="form-control" name="email" placeholder="Email Address">
+                        <span id="emailError" style="color: red;"></span>
+
                     </div>
                 </div>
             </div>
@@ -133,12 +146,16 @@
                     <div class="form-group">
                         <label for="mobileNo">Mobile No</label>
                         <input type="text" id="mobileNo" class="form-control" name="mobile" placeholder="Mobile Number">
+                        <span id="mobileError" class="error"></span>
+
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="dob">Date of Birth</label>
                         <input type="date" id="dob" name="dob" class="form-control">
+<%--                        <span id="dobError" class="error"></span>--%>
+
                     </div>
                 </div>
             </div>
@@ -158,6 +175,8 @@
                     <div class="form-group">
                         <label for="photo">Upload Photo</label>
                         <input type="file" id="photo" name="image" class="form-control-file">
+
+
                     </div>
                 </div>
             </div>
