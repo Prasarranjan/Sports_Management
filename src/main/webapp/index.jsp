@@ -47,6 +47,17 @@
             background-color: #28a745;
             color: white;
         }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-header h2 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
 
     </style>
 </head>
@@ -192,7 +203,83 @@
             <button type="submit" class="btn btn-custom">Submit</button>
             <button type="reset" class="btn btn-reset">Reset</button>
         </div>
+
     </form>
+    <div class="container">
+        <div class="table-header text-center">
+            <h2>Registration Details </h2>
+        </div>
+
+        <form id="clubFilterForm">
+            <div class="form-group row">
+                <label for="clubFilter" class="col-sm-2 col-form-label">Filter by Club:</label>
+                <div class="col-sm-10">
+                    <select id="clubFilter" name="clubFilter" class="form-control" >
+                        <option value="">Select Club</option>
+                        <%
+
+                            // Database connection details
+                            String jdbcURL1 = "jdbc:mysql://localhost:3306/SportsClub";
+
+                            String jdbcUsername1 = "root";  // change to your username
+                            String jdbcPassword1 = "prasar123";  // change to your password
+
+                            // Query to fetch club names and IDs
+                            String sql1 = "SELECT clubId, clubName FROM Club";
+
+                            Connection conn1 = null;
+                            Statement stmt1 = null;
+                            ResultSet rs1 = null;
+
+                            try {
+                                // Load the MySQL JDBC driver
+                                Class.forName("com.mysql.cj.jdbc.Driver");
+
+                                // Establish connection to the database
+                                conn = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+
+                                // Execute query
+                                stmt = conn.createStatement();
+                                rs = stmt.executeQuery(sql1);
+
+                                // Populate the dropdown with club names and bind the ID as value
+                                while (rs.next()) {
+                                    int clubId = rs.getInt("clubId");
+                                    String clubName = rs.getString("clubName");
+                        %>
+                        <option value="<%= clubId %>"><%= clubName %></option>
+                        <%
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        %>
+
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile No</th>
+                <th>Image</th>
+                <th>Club Name</th>
+                <th>Sports Name</th>
+                <th>Fees</th>
+            </tr>
+            </thead>
+            <tbody class="table-success" id="viewplayer">
+
+            </tbody>
+        </table>
+    </div>
+
+
 
 </div>
 

@@ -57,7 +57,7 @@ public class servlet extends HttpServlet {
                 String mobile = req.getParameter("mobile");
                 String dob = req.getParameter("dob");
                 String gender = req.getParameter("gender");
-                int clubId = Integer.parseInt(req.getParameter("clubId"));
+                int clubId = Integer.parseInt(req.getParameter("clubName"));
                 int sportsId = Integer.parseInt(req.getParameter("sportsId"));
 
                 // Get the image file from the form
@@ -112,6 +112,22 @@ public class servlet extends HttpServlet {
                 e.printStackTrace();
                 out.println("Invalid number format");
             }
+        } else if (event.equals("viewplayer")) {
+            int id=Integer.parseInt(req.getParameter("ClubId"));
+            jdbc ed= new jdbc();
+            List<Registration> ser=ed.show(id);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson  gson = gsonBuilder.create();
+            String JSONObject = gson.toJson(ser);
+            out.print(JSONObject);
+        } else if (event.equals("viewplayerall")) {
+            //System.out.println(id);
+            jdbc ed= new jdbc();
+            List<Registration> ser=ed.getall();
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson  gson = gsonBuilder.create();
+            String JSONObject = gson.toJson(ser);
+            out.print(JSONObject);
         }
     }
 }

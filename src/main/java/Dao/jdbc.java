@@ -69,4 +69,55 @@ public class jdbc {
         }
         return result;
     }
+    public static List<Registration> show(int clubId){
+        ArrayList<Registration> list = new ArrayList<>();
+        try {
+            Connection con = getConnection();
+            String sql = " SELECT  ROW_NUMBER() OVER(ORDER BY r.regdId) AS slno,  r.name, r.email, r.mobile, r.image, c.clubName, s.sportsName, s.fees FROM Registration r INNER JOIN Club c ON r.clubId = c.clubId INNER JOIN Sports s ON r.sportsId = s.sportsId WHERE r.clubId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, clubId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Registration rr=new Registration();
+               rr.setRegId(rs.getInt(1));
+               rr.setName(rs.getString(2));
+               rr.setEmail(rs.getString(3));
+               rr.setMobile(rs.getString(4));
+               rr.setImage(rs.getString(5));
+               rr.setClubName(rs.getString(6));
+               rr.setSportsName(rs.getString(7));
+               rr.setFees(rs.getDouble(8));
+               list.add(rr);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+    public static List<Registration> getall(){
+        ArrayList<Registration> list = new ArrayList<>();
+        try {
+            Connection con = getConnection();
+            String sql = " SELECT  ROW_NUMBER() OVER(ORDER BY r.regdId) AS slno,  r.name, r.email, r.mobile, r.image, c.clubName, s.sportsName, s.fees FROM Registration r INNER JOIN Club c ON r.clubId = c.clubId INNER JOIN Sports s ON r.sportsId = s.sportsId ;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Registration rr=new Registration();
+                rr.setRegId(rs.getInt(1));
+                rr.setName(rs.getString(2));
+                rr.setEmail(rs.getString(3));
+                rr.setMobile(rs.getString(4));
+                rr.setImage(rs.getString(5));
+                rr.setClubName(rs.getString(6));
+                rr.setSportsName(rs.getString(7));
+                rr.setFees(rs.getDouble(8));
+                list.add(rr);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

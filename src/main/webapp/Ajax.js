@@ -175,3 +175,99 @@ $(document).ready(function () {
         }
     });
 });
+//when club not selected
+
+$(document).ready(function () {
+
+    $.ajax({
+        url: "servlet",
+        type: "POST",
+        data: {
+            "event": "viewplayerall",
+        },
+        dataType: 'JSON',
+        success: function (response) {
+            let s = "";
+            let i = 1;
+
+            // Check if response contains data
+            if (response.length > 0) {
+                // Loop through each player data and append to the table
+                for (var key in response) {
+                    if (response.hasOwnProperty(key)) {
+                        s += "<tr>";
+                        s += "<td>" + response[key].regId + "</td>";
+                        s += "<td>" + response[key].name + "</td>";
+                        s += "<td>" + response[key].email + "</td>";
+                        s += "<td>" + response[key].mobile + "</td>";
+                        s+="<td><img src='image/"+response[key].image+"' height='50px' width='50px'></td>";
+                        s += "<td>" + response[key].clubName + "</td>";
+                        s += "<td>" + response[key].sportsName + "</td>";
+                        s += "<td>" + response[key].fees + "</td>";
+                        s += "</tr>";
+                    }
+                    i++;
+                }
+            } else {
+                // If no players found, show a message
+                s = "<tr><td colspan='8'>No players found for the selected club</td></tr>";
+            }
+
+            // Update the table body with the new rows
+            $('#viewplayer').html(s);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error("Error: " + textStatus, errorThrown);
+        }
+    });
+});
+
+
+$(document).ready(function () {
+    $('#clubFilter').change(function () {
+        let clubId = $(this).val(); // Get selected clubId
+
+        $.ajax({
+            url: "servlet",
+            type: "POST",
+            data: {
+                "event": "viewplayer",
+                "ClubId": clubId
+            },
+            dataType: 'JSON',
+            success: function (response) {
+                let s = "";
+                let i = 1;
+
+                // Check if response contains data
+                if (response.length > 0) {
+                    // Loop through each player data and append to the table
+                    for (var key in response) {
+                        if (response.hasOwnProperty(key)) {
+                            s += "<tr>";
+                            s += "<td>" + response[key].regId + "</td>";
+                            s += "<td>" + response[key].name + "</td>";
+                            s += "<td>" + response[key].email + "</td>";
+                            s += "<td>" + response[key].mobile + "</td>";
+                            s+="<td><img src='image/"+response[key].image+"' height='50px' width='50px'></td>";
+                            s += "<td>" + response[key].clubName + "</td>";
+                            s += "<td>" + response[key].sportsName + "</td>";
+                            s += "<td>" + response[key].fees + "</td>";
+                            s += "</tr>";
+                        }
+                        i++;
+                    }
+                } else {
+                    // If no players found, show a message
+                    s = "<tr><td colspan='8'>No players found for the selected club</td></tr>";
+                }
+
+                // Update the table body with the new rows
+                $('#viewplayer').html(s);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("Error: " + textStatus, errorThrown);
+            }
+        });
+    });
+});

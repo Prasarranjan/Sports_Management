@@ -11,7 +11,9 @@ public class Registration {
         private String image;
         private int clubId;
         private int sportsId;
-
+        private String sportsName;
+        private String clubName;
+        private Double fees;
         // Getter and Setter methods for regId
         public int getRegId() {
             return regId;
@@ -92,5 +94,28 @@ public class Registration {
         public void setSportsId(int sportsId) {
             this.sportsId = sportsId;
         }
+
+        public String getSportsName(String sportsName) {
+        return this.sportsName;
+    }
+
+    public void setSportsName(String sportsName) {
+        this.sportsName = sportsName;
+    }
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+    public double getFees() {
+        return fees;
+    }
+
+    public void setFees(double fees) {
+        this.fees = fees;
+    }
+
     }
 
